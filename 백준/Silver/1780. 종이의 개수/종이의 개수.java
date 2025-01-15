@@ -41,8 +41,9 @@ public class Main {
 		partition(0,0,n);
 		
 		for(int a : count) {
-			System.out.println(a);
+			sb.append(a).append("\n");
 		}
+		System.out.println(sb.toString());
 	}
 	public static void partition(int row, int col, int size) {
 		if(check(row,col,size)) {
@@ -50,15 +51,12 @@ public class Main {
 			return;
 		}
 				
-		partition(row, col, size/3);
-		partition(row, col + size/3, size/3);
-		partition(row, col + size/3 * 2 , size/3);
-		partition(row + size/3, col , size/3);
-		partition(row + size/3, col + size/3, size/3);
-		partition(row + size/3, col + size/3 * 2, size/3);
-		partition(row + size/3 * 2, col, size/3);
-		partition(row + size/3 * 2, col + size/3, size/3);
-		partition(row + size/3 * 2, col + size/3 * 2, size/3);	
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				partition(row + size/3 * i, col + size/3 * j, size/3);	
+			}
+		}
+		
 	}
 	public static boolean check(int row, int col, int size) {
 		int start = arr[row][col];
